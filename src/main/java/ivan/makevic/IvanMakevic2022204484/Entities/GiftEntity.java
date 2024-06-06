@@ -38,4 +38,14 @@ public class GiftEntity {
         this.createdAt = createdAt;
         this.birthday = birthday;
     }
+
+    public GiftEntity(String giftText, float giftPrice, BirthdayEntity bday) {
+        this.giftText = giftText;
+        this.giftPrice = giftPrice;
+        this.createdAt = LocalDateTime.now();
+        this.birthday = bday;
+    }
+
+    public GiftEntity() {
+    }
 }
