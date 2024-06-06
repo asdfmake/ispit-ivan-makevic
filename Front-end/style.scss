@@ -1,0 +1,43 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.app{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+    // todo: add header
+
+    main{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        flex-direction: column;
+        
+        figure{
+            width: 100%;
+
+            .rodjendan{
+                padding: 15px 0;
+                margin: 15px 0;
+                background-color: red;
+                width: 100%;
+                display: grid;
+                grid-template-columns: auto auto auto;
+                text-align: center;
+
+                button{
+                    width: 50%;
+                    margin-left: 25%;
+                }
+            }
+        }
+
+        
+    }
+}

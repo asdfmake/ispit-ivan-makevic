@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.app main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  flex-direction: column;
+}
+.app main figure {
+  width: 100%;
+}
+.app main figure .rodjendan {
+  padding: 15px 0;
+  margin: 15px 0;
+  background-color: red;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  text-align: center;
+}
+.app main figure .rodjendan button {
+  width: 50%;
+  margin-left: 25%;
+}/*# sourceMappingURL=style.css.map */
