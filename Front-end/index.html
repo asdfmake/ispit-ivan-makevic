@@ -15,41 +15,102 @@
     
         <main>  
             <h2>Rodjendajni</h2>
-            <figure>
-                <div class="rodjendan">
-                    <span class="rodjendan-za" id="rodjendanZa">Rodjendan za: peru</span>
-                    <span class="rodjendan-datum" id="rodjendanDatum">Datuma: 545454545454</span>
-                    <button onclick="loadRodjendan(21)">Saznaj vise</button>
-                </div>
-                <div class="rodjendan">
-                    <span class="rodjendan-za" id="rodjendanZa">peru</span>
-                    <span class="rodjendan-datum" id="rodjendanDatum">545454545454</span>
-                    <button onclick="loadRodjendan(21)">Saznaj vise</button>
-                </div>
-                <div class="rodjendan">
-                    <span class="rodjendan-za" id="rodjendanZa">peru</span>
-                    <span class="rodjendan-datum" id="rodjendanDatum">545454545454</span>
-                    <button onclick="loadRodjendan(21)">Saznaj vise</button>
-                </div>
-                <div class="rodjendan">
-                    <span class="rodjendan-za" id="rodjendanZa">peru</span>
-                    <span class="rodjendan-datum" id="rodjendanDatum">545454545454</span>
-                    <button onclick="loadRodjendan(21)">Saznaj vise</button>
-                </div>
-                <div class="rodjendan">
-                    <span class="rodjendan-za" id="rodjendanZa">peru</span>
-                    <span class="rodjendan-datum" id="rodjendanDatum">545454545454</span>
-                    <button onclick="loadRodjendan(21)">Saznaj vise</button>
-                </div>
+            <figure id="rodjendaniHolder">
 
             </figure>
         </main>
+
+        <figure class="popup" id="popup">
+            <header>
+                <h2>Pokloni:</h2>
+                <span onclick="closePopup()">x</span>
+            </header>
+            
+            <figure class="pokloni" id="pokloni">
+                
+                <div class="poklon">
+                    <span>created at: </span>
+                    <span>gift idea</span>
+                    <span>500</span>
+                </div>
+
+                
+
+            </figure>
+
+            <footer id="ukupna cena">
+                Ukupna cena: 150
+            </footer>
+
+            <figure class="dodajNoviPoklon">
+                <input type="text" placeholder="Nova ideja za poklon">
+                <button>Dodaj</button>
+            </figure>
+
+        </figure>
 
     </div>
     
 
     
     <script>
+        init()
+        function init(){
+            fetchRodjendane()
+        }
+
+        function fetchRodjendane(){
+            let rodjendaniHolder = document.getElementById("rodjendaniHolder")
+            rodjendaniHolder.innerHTML=""
+
+            fetch("http://localhost:8080/getBirthdays").then(e=>e.json()).then(response =>{
+                console.log(response)
+
+                response.forEach(rodjendan => {
+                    rodjendaniHolder.innerHTML += 
+                    `
+                    <div class="rodjendan">
+                        <span class="rodjendan-za" id="rodjendanZa">Rodjendan za: ${rodjendan.bdayFor}</span>
+                        <span class="rodjendan-datum" id="rodjendanDatum">Datuma: ${rodjendan.bdayAt}</span>
+                        <button onclick="loadRodjendan(${rodjendan.birthDayId})">Saznaj vise</button>
+                    </div>
+                    `
+                });
+            })
+        }
+
+        function loadRodjendan(rodjendanId){
+            let giftHolder = document.getElementById("pokloni")
+            giftHolder.innerHTML = ""
+            console.log(rodjendanId)
+            fetch("http://localhost:8080/getSpecificBirthday/" + rodjendanId).then(e=>e.json()).then(response =>{
+                console.log(response.gifts)
+                response.gifts.forEach(gift=>{
+                    giftHolder.innerHTML +=
+                    `
+                    <div class="poklon">
+                        <span>created at: ${gift.createdAt}</span>
+                        <span>${gift.giftText}</span>
+                        <span>${gift.giftPrice}</span>
+                    </div>
+                    `
+                })
+            })
+
+            openPopup()
+        }
+
+        
+
+        function closePopup(){
+            let popupWindows = document.getElementById("popup")
+            popupWindows.classList.add("hidden")
+        }
+
+        function openPopup(){
+            let popupWindows = document.getElementById("popup")
+            popupWindows.classList.remove("hidden")
+        }
 
     </script>
     
