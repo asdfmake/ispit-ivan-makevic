@@ -22,7 +22,7 @@ public class BirthdayEntity {
     @Column(name = "bday_at")
     private LocalDateTime bdayAt;
 
-    @OneToMany(mappedBy = "giftId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "birthday", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<GiftEntity> gifts;
 
     public BirthdayEntity(Long birthDayId, String bdayFor, LocalDateTime bdayAt, List<GiftEntity> gifts) {

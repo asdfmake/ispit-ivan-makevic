@@ -43,6 +43,21 @@
         
     }
 
+    .create-new-thread{
+        width: 100%;
+        background-color: rgb(83, 83, 83);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 30px 0;
+
+        span,
+        button{
+            margin-left: 30px;
+            margin-right: 10px;
+        }
+    }
+
     .popup{
         position: absolute;
         width: 90vw;
